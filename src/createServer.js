@@ -9,8 +9,7 @@ function createServer() {
   return http.createServer((req, res) => {
     const url = new URL(req.url, `http://localhost:5701`);
 
-    const normalizedPathname = url.pathname.replace(/\/+/g, '/');
-    const parts = normalizedPathname.slice(1).split('/');
+    const parts = url.pathname.slice(1).split('/').filter(Boolean);
     const query = Object.fromEntries(url.searchParams);
     const result = {
       parts,
